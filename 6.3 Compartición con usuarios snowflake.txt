@@ -1,0 +1,38 @@
+-----------------EN LA CUENTA DEL PRODUCTOR DE DATOS---------------
+
+// Crear objeto share
+CREATE OR REPLACE SHARE ORDERS_SHARE;
+
+---- Dar permisos ----
+
+// Permiso a BBDD
+GRANT USAGE ON DATABASE PRIMERABBDD TO SHARE ORDERS_SHARE; 
+
+// Permiso a esquema
+GRANT USAGE ON SCHEMA PRIMERABBDD.PRIMERESQUEMA TO SHARE ORDERS_SHARE; 
+
+// Permiso a tabla
+
+GRANT SELECT ON TABLE PRIMERABBDD.PRIMERESQUEMA.ORDERS TO SHARE ORDERS_SHARE; 
+
+// Verificar permisos
+SHOW GRANTS TO SHARE ORDERS_SHARE;
+
+
+---- Añadir la cuenta del consumidor ----
+ALTER SHARE ORDERS_SHARE ADD ACCOUNT=<cuenta_consumidor>;
+
+
+
+----------------EN LA CUENTA DEL CONSUMIDOR DE DATOS-------------
+// Ver las comparticiones conmigo
+SHOW SHARES
+
+// Detalle del share
+DESC SHARE ID.ORDERS.SHARE
+
+//Crear BBDD en la cuenta consumidor usando el share
+CREATE DATABASE PRIMERABBDD FROM SHARE ID.ORDERS.SHARE
+
+//Validar resultados
+SELECT * FROM PRIMERABBDD.PRIMERESQUEMA.ORDERS

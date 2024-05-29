@@ -1,0 +1,28 @@
+SELECT  FROM PRIMERABBDD.PRIMERESQUEMA.employees    
+
+ Insertamos un error
+UPDATE PRIMERABBDD.PRIMERESQUEMA.employees
+SET FIRST_NAME = 'Juan' 
+
+   Time travel Método 1 (volver 2 minutos atrás)
+
+SELECT  FROM PRIMERABBDD.PRIMERESQUEMA.employees at (OFFSET = -602)
+
+ Restaurar tabla original a través de una tabla backup para no eliminar los metadatos de la tabla original
+CREATE OR REPLACE TABLE PRIMERABBDD.PRIMERESQUEMA.employees_backup as
+SELECT  FROM PRIMERABBDD.PRIMERESQUEMA.employees at (OFFSET = -602)
+
+ Limpiamos la tabla original
+TRUNCATE PRIMERABBDD.PRIMERESQUEMA.employees    
+
+ Insertamos los datos de la tabla backup en la tabla original
+INSERT INTO PRIMERABBDD.PRIMERESQUEMA.employees
+SELECT  FROM PRIMERABBDD.PRIMERESQUEMA.employees_backup
+
+
+SELECT  FROM PRIMERABBDD.PRIMERESQUEMA.employees
+
+DROP PRIMERABBDD.PRIMERESQUEMA.employees_backup
+
+ Método 2 time stamp SELECT  FROM PRIMERABBDD.PRIMERESQUEMA.employees before (timestamp = '2023-08-16 073047.145'timestamp)
+ Método 3 query ID SELECT  FROM PRIMERABBDD.PRIMERESQUEMA.employees before (statement = '019b9ee5-0500-8473-0043-4d8300073062')
