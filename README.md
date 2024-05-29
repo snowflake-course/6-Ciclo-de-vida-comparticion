@@ -2,7 +2,7 @@
 1. [Time Travel y Fail Safe](#schema1)
 2. [Tipos de tabla en Snowflake](#schema2)
 3. [Compartir de datos con otra cuenta de Snowflake](#schema3)
-
+4. [¿Cómo conectar Snowflake con Power BI o Python?](#schema4)
 
 <hr>
 
@@ -149,3 +149,18 @@ CREATE DATABASE PRIMERABBDD FROM SHARE ID.ORDERS.SHARE
 ```sql
 SELECT * FROM PRIMERABBDD.PRIMERESQUEMA.ORDERS
 ```
+
+<hr>
+
+<a name="schema4"></a>
+
+## 4. ¿Cómo conectar Snowflake con Power BI o Python?
+
+![](./img/conectar.png)
+
+![](./img/conectar_2.png)
+
+![](./img/conectar_3.png)
+
+
+[Script Python](6.5%20Conexión%20Snowflake%20-%20Python.ipynb)
